@@ -1,0 +1,34 @@
+plugins {
+	id "java"
+}
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+jar {
+	baseName = "src-java"
+	version = "1.0"
+	manifest { attributes "Main-Class": "com.vpdong.temp.java.App" }
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	into('assets') { from 'assets' }
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+
+	compile project(':library')
+
+	testCompile 'junit:junit:4.12'
+}
+
+compileJava.dependsOn clean
+
+task release(type: Copy) {
+	def out = String.format("%s-%s.jar", jar.baseName, jar.version)
+
+	group "build"
+	delete "../release/" + out
+
+	from('build/libs/')
+	into('../release/')
+	include(out)
+}

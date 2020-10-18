@@ -1,0 +1,13 @@
+plugins {
+	id "java"
+}
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+dependencies {
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+
+	testCompile 'junit:junit:4.12'
+}
+
+compileJava.dependsOn clean

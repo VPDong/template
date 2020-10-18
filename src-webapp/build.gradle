@@ -1,0 +1,15 @@
+plugins {
+	id "com.github.node-gradle.node" version "1.3.0"
+}
+
+// npm run build
+task npmBuild(type: NpmTask, dependsOn: npmInstall) {
+	group = 'build'
+	args = ['run', 'build']
+}
+
+// npm run serve
+task npmServe(type: NpmTask, dependsOn: npmInstall) {
+	group = 'build'
+	args = ['run', 'serve']
+}
