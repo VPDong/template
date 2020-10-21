@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60" debug="false">
+	<!-- %d日期，%t线程名，%c类的全名，%p日志级别，%file文件名，%line行数，%m%n输出的信息 -->
 	<contextName>logback</contextName>
 
 	<property name="LOG_HOME" value="data/logs"/>

@@ -1,0 +1,63 @@
+package com.temp.server;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+/**
+ * 使用MockMvc测试接口
+ */
+@WebAppConfiguration
+@AutoConfigureMockMvc
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = App.class)// 底层实际上还是使用了Junit框架
+public class MockTest {
+    private static Logger LOGGER = LoggerFactory.getLogger(MockTest.class);
+
+    @Autowired
+    private MockMvc mMockMvc;
+    @Autowired
+    private WebApplicationContext mContext;
+
+    @Before
+    public void onCreate() throws Exception {
+        LOGGER.info("测试前，打印...");
+        mMockMvc = MockMvcBuilders.webAppContextSetup(mContext).build();
+    }
+
+    @After
+    public void onDestroy() throws Exception {
+        LOGGER.info("测试后，打印...");
+    }
+
+    @Test
+    public void onExecute() throws Exception {
+        String expResult = "Hello，greetings from sprint-boot2-autotest";
+        MvcResult mvcResult = mMockMvc.perform(MockMvcRequestBuilders.get("/test"))
+                // 期望：200成功状态码
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                // 期望：返回结果数据
+                .andExpect(MockMvcResultMatchers.content().string(expResult))
+                .andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        LOGGER.info("返回状态码status=" + status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        LOGGER.info("返回结果数据content=" + content);
+    }
+}

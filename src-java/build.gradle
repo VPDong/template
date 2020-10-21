@@ -20,15 +20,4 @@ dependencies {
 	testCompile 'junit:junit:4.12'
 }
 
-compileJava.dependsOn clean
-
-task release(type: Copy) {
-	def out = String.format("%s-%s.jar", jar.baseName, jar.version)
-
-	group "build"
-	delete "../release/" + out
-
-	from('build/libs/')
-	into('../release/')
-	include(out)
-}
+apply from: '../release.gradle'

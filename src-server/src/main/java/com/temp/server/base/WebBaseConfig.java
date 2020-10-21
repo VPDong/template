@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
-public abstract class AppConfig {
+@Configuration
+public class WebBaseConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -32,10 +33,5 @@ public abstract class AppConfig {
             jacksonObjectMapperBuilder.serializationInclusion(JsonInclude.Include.NON_NULL);// 属性为NULL不序列化
             jacksonObjectMapperBuilder.failOnUnknownProperties(false);
         };
-    }
-
-    @Bean
-    public ServerEndpointExporter serverEndpointExporter() {
-        return new ServerEndpointExporter();
     }
 }

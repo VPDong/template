@@ -107,7 +107,7 @@ public class SQLiteDialect extends Dialect {
 		uniqueDelegate = new SQLiteUniqueDelegate(this);
 	}
 
-	// IDENTITY support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// IDENTITY support
 
 	private static final SQLiteDialectIdentityColumnSupport IDENTITY_COLUMN_SUPPORT = new
 			SQLiteDialectIdentityColumnSupport(new SQLiteDialect());

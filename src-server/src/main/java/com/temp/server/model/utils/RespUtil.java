@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
-public class RespUtils {
+public class RespUtil {
 	public static boolean isJsonRequest(HttpServletRequest request) {
 		if (request == null) return false;
 		return (request.getContentType().toLowerCase().contains("application/json"));

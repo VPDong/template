@@ -9,7 +9,7 @@ public class TestService {
     @Autowired
     private DBModel mDBModel;
 
-    public void test() {
+    public void exec() {
         // todo
     }
 }

@@ -29,8 +29,8 @@ public class BaseResp<T> {
         this.data = data;
     }
 
-    public static BaseResp build(int code, String msg) {
-        BaseResp resp = new BaseResp();
+    public static <T> BaseResp<T> build(int code, String msg) {
+        BaseResp<T> resp = new BaseResp<>();
         resp.setCode(code);
         resp.setMsg(msg == null ? "" : msg);
         return resp;
